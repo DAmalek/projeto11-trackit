@@ -1,24 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter,Route,Routes } from "react-router-dom";
+import GlobalStyle from './assets/styles/globalStyle';
+import AddHabit from "./components/AddHabit";
+import Footer from "./components/Footer";
+import HabitList from "./components/HabitList";
+import Header from "./components/Header";
+import LogInForm from "./components/LogInForm";
+import TodayHabit from "./components/TodayHabit";
+import SignInPage from "./pages/cadastro/SignInPage";
+import AddHabitPage from "./pages/habito/AddHabitpage";
+import History from "./pages/historico/History";
+import TodayPage from "./pages/hoje/TodayPage";
+import LogInPage from "./pages/login/LogInPage";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <GlobalStyle />
+      <History  />
+    </BrowserRouter>
   );
 }
 
