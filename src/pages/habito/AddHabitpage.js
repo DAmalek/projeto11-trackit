@@ -9,7 +9,8 @@ import HabitList from "../../components/HabitList";
 export default function AddHabitPage() {
   const [addhabit, setAddhabit] = useState(false);
   const [SelectedDays,setSelectedDays] = useState([])
-  
+  const [list, setList] = useState([]);
+  const [refresh, setRefresh] = useState(false)
   console.log()
   return (
     <>
@@ -20,17 +21,25 @@ export default function AddHabitPage() {
             setAddhabit={setAddhabit}
             SelectedDays={SelectedDays}
             setSelectedDays={setSelectedDays}
+            list={list}
+            setList={setList}
+            refresh={refresh}
+            setRefresh={setRefresh}
           />
         ) : (
           ""
         )}
+        {list !== [] ?
+         "" :
         <p>
           Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
           começar a trackear!
-        </p>
+        </p>}
         <HabitList
-          SelectedDays={SelectedDays}
-          setSelectedDays={setSelectedDays}
+          list={list}
+          setList={setList}
+          refresh={refresh}
+          setRefresh={setRefresh}
         />
       </PageContainer>
       <Footer />
@@ -39,10 +48,13 @@ export default function AddHabitPage() {
 }
 
 const PageContainer = styled.div`
+  height: auto;
   margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  overflow-y: scroll;
+  margin-bottom: 50px;
 
   p {
     color: ${textColor};

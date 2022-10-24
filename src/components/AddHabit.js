@@ -9,7 +9,7 @@ import { BASE_URL } from "../constants/urls";
 import { UserContext } from "../context/UserContext";
 import WeekdaysBtn from "./WeekdaysBtn";
 
-export default function AddHabit({setAddhabit,SelectedDays,setSelectedDays}) {
+export default function AddHabit({setAddhabit,SelectedDays,setSelectedDays,list, setList,refresh, setRefresh}) {
   
   const [name,setName] = useState('')
   const {userdata, setUserdata} = useContext(UserContext);
@@ -25,11 +25,14 @@ export default function AddHabit({setAddhabit,SelectedDays,setSelectedDays}) {
     axios.post(
       `${BASE_URL}habits`, 
       body,
-      { headers: { Authorization: `Bearer ${token}` } }
-      
+      { headers: { Authorization: `Bearer ${token}` } }  
     )
     .then(
-      (resp) => console.log(resp.data)
+      (resp) => {
+        //setList(...list,resp.data);
+        console.log(resp.data)
+        setRefresh(!refresh)
+      }
     )
     .catch(
       (error => alert(error.response.data.message))
