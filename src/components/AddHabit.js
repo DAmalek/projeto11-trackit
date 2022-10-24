@@ -43,10 +43,11 @@ export default function AddHabit({setAddhabit,SelectedDays,setSelectedDays,list,
     <>
       <HabitBox>
         <input 
+          type='text'
           placeholder="  nome do habito"
           name="name"
           value={name}
-          onChange={e=>setName(e.target.value)}
+          onChange={e=>setName(e.target.value)}          
           required
         />
         <WeekdaysBtn 

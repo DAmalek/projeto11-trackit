@@ -20,7 +20,7 @@ export default function AddHabitPage() {
       <SubTitle>
         <h2>Meus hábitos</h2>
         <img onClick={()=> setAddhabit(true)} src={rectangleminor} alt="r" />
-        <img onClick={()=> setAddhabit(true)} src={mais} alt="m" />
+        <img onClick={()=> setAddhabit(!addhabit)} src={mais} alt="m" />
       </SubTitle>
       <PageContainer>
         {addhabit ? (

@@ -5,6 +5,7 @@ import { BASE_URL } from "../constants/urls";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
 
+
 export default function LogInForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

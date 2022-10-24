@@ -1,14 +1,39 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { accentColor } from "../constants/colors";
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
+import 'react-circular-progressbar/dist/styles.css';
+import { useContext } from "react";
+import { ProgressContext } from "../context/ProgressContext";
+
+
 
 export default function Footer() {
+  const { taskdonePercent, setTaskdonePercent } = useContext(ProgressContext);
+  
   return (
     <>
       <Menu>
-        <Link to='/habitos'><h1>Hábitos</h1></Link> 
-        <Link to='/hoje'><div>Hoje</div></Link>
-        <Link to='/historico'><h1>Histórico</h1></Link>
+        <Link to="/habitos">
+          <h1>Hábitos</h1>
+        </Link>
+        <Link to="/hoje">
+          <div>
+            <CircularProgressbar
+              styles={buildStyles({
+                textColor: "#fff",
+                pathColor: "#FFFFFF",
+                trailColor: "#52B6FF",
+              })}
+              value={taskdonePercent}
+              maxValue={100}
+              text={'Hoje'}
+            />
+          </div>
+        </Link>
+        <Link to="/historico">
+          <h1>Histórico</h1>
+        </Link>
       </Menu>
     </>
   );
@@ -43,6 +68,7 @@ const Menu = styled.div`
     align-items: center;
     justify-content: center;
     margin-bottom: 35px;
+    padding: 4px;
   }
 
   a {
