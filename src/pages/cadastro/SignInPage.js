@@ -2,6 +2,7 @@ import styled from "styled-components"
 import SignInForm from "../../components/SignInForm"
 import logo from '../../assets/images/logo.svg'
 import { accentColor } from "../../constants/colors"
+import { Link } from "react-router-dom"
 
 export default function SignInPage(){
     return(
@@ -9,7 +10,7 @@ export default function SignInPage(){
         <PageContainer>
             <img src={logo} alt="logo" />
             <SignInForm />
-            <p>Já tem conta? Faça login!</p>
+            <Link to='/'><p>Já tem conta? Faça login!</p></Link> 
         </PageContainer>
         
         </>

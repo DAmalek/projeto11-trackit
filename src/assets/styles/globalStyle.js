@@ -53,6 +53,9 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+a {
+    text-decoration: none;
+  }
 input {
     width: 300px;
     height: 50px;

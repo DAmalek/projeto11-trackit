@@ -3,14 +3,35 @@ import Header from "../../components/Header";
 import styled from "styled-components";
 import { textColor } from "../../constants/colors";
 import Footer from "../../components/Footer";
+import { useState } from "react";
+import HabitList from "../../components/HabitList";
 
 export default function AddHabitPage() {
+  const [addhabit, setAddhabit] = useState(false);
+  const [SelectedDays,setSelectedDays] = useState([])
+  
+  console.log()
   return (
     <>
-      <Header />
+      <Header addhabit={addhabit} setAddhabit={setAddhabit} />
       <PageContainer>
-        <AddHabit />
-        <p>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</p>
+        {addhabit ? (
+          <AddHabit
+            setAddhabit={setAddhabit}
+            SelectedDays={SelectedDays}
+            setSelectedDays={setSelectedDays}
+          />
+        ) : (
+          ""
+        )}
+        <p>
+          Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
+          começar a trackear!
+        </p>
+        <HabitList
+          SelectedDays={SelectedDays}
+          setSelectedDays={setSelectedDays}
+        />
       </PageContainer>
       <Footer />
     </>

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { accentColor } from "../constants/colors";
 
@@ -5,9 +6,9 @@ export default function Footer() {
   return (
     <>
       <Menu>
-        <h1>Hábitos</h1>
-        <div>Hoje</div>
-        <h1>Histórico</h1>
+        <Link to='/habitos'><h1>Hábitos</h1></Link> 
+        <Link to='/hoje'><div>Hoje</div></Link>
+        <Link to='/historico'><h1>Histórico</h1></Link>
       </Menu>
     </>
   );
@@ -42,5 +43,9 @@ const Menu = styled.div`
     align-items: center;
     justify-content: center;
     margin-bottom: 35px;
+  }
+
+  a {
+    text-decoration: none;
   }
 `;

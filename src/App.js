@@ -1,23 +1,31 @@
 import { BrowserRouter,Route,Routes } from "react-router-dom";
 import GlobalStyle from './assets/styles/globalStyle';
-import AddHabit from "./components/AddHabit";
-import Footer from "./components/Footer";
-import HabitList from "./components/HabitList";
-import Header from "./components/Header";
-import LogInForm from "./components/LogInForm";
-import TodayHabit from "./components/TodayHabit";
 import SignInPage from "./pages/cadastro/SignInPage";
-import AddHabitPage from "./pages/habito/AddHabitpage";
-import History from "./pages/historico/History";
+import HistoryPage from "./pages/historico/HistoryPage";
 import TodayPage from "./pages/hoje/TodayPage";
 import LogInPage from "./pages/login/LogInPage";
-
-
+import AddHabitPage from "./pages/habito/AddHabitpage";
+import { UserContext } from "./context/UserContext";
+import { useState } from "react";
+import React from "react";
 function App() {
+  const [userdata, setUserdata] = useState(null);
+
   return (
     <BrowserRouter>
       <GlobalStyle />
-      <History  />
+      <UserContext.Provider value={{ userdata, setUserdata}}>
+        <Routes>
+          <Route path='/' element={<LogInPage />}  />
+          <Route path='cadastro' element={<SignInPage />}  />
+          <Route path='/habitos' element={<AddHabitPage />}  />
+          <Route path='/hoje' element={<TodayPage />}  />
+          <Route path='/historico' element={<HistoryPage />}  />
+          <Route path='login' element={<LogInPage />}  />
+          <Route path='login' element={<LogInPage />}  />
+        </Routes>
+      </UserContext.Provider>
+      
     </BrowserRouter>
   );
 }
