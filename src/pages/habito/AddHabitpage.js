@@ -5,6 +5,8 @@ import { textColor } from "../../constants/colors";
 import Footer from "../../components/Footer";
 import { useState } from "react";
 import HabitList from "../../components/HabitList";
+import mais from '../../assets/images/+.svg'
+import rectangleminor from '../../assets/images/rectangleminor.svg'
 
 export default function AddHabitPage() {
   const [addhabit, setAddhabit] = useState(false);
@@ -14,7 +16,12 @@ export default function AddHabitPage() {
   console.log()
   return (
     <>
-      <Header addhabit={addhabit} setAddhabit={setAddhabit} />
+      <Header />
+      <SubTitle>
+        <h2>Meus hábitos</h2>
+        <img onClick={()=> setAddhabit(true)} src={rectangleminor} alt="r" />
+        <img onClick={()=> setAddhabit(true)} src={mais} alt="m" />
+      </SubTitle>
       <PageContainer>
         {addhabit ? (
           <AddHabit
@@ -60,5 +67,32 @@ const PageContainer = styled.div`
     color: ${textColor};
     font-size: 19px;
     padding: 18px 22px;
+  }
+`;
+const SubTitle = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 50px;
+  
+  margin-top: 74px;
+  position: relative;
+
+  h2 {
+    font-size: 24px;
+    color: #126BA5;
+    padding-left: 20px;
+  }
+  img {
+    position: absolute;
+    top: 7px;
+    right: 17px;
+    cursor: pointer;
+  }
+  img:nth-child(3) {
+    position: absolute;
+    top: 17px;
+    right: 30px;
   }
 `;

@@ -20,8 +20,10 @@ export default function HabitList({list, setList,refresh, setRefresh}) {
       .get(`${BASE_URL}habits`, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((resp) => {(setList(resp.data))} )
-      .catch((err) => alert(err.response.data.message))
+      .then((resp) => {
+        setList(resp.data);
+      })
+      .catch((err) => alert(err.response.data.message));
   }, [refresh]);
 
     function deleteHabit(props) {

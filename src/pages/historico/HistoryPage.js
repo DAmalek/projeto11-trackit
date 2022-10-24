@@ -16,7 +16,7 @@ export default function History() {
 }
 
 const PageContainer = styled.div`
-  margin-top: 20px;
+  margin-top: 80px;
   display: flex;
   flex-direction: column;
   align-items: center;

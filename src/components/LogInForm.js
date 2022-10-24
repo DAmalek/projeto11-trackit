@@ -24,7 +24,7 @@ export default function LogInForm() {
     promise.then((resp)=>{
       console.log(resp.data)
       alert('funfou');
-      navigate('/habitos')
+      navigate('/hoje')
       setUserdata(resp.data);
       
     })

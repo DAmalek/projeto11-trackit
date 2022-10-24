@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import mais from '../assets/images/+.svg'
-import rectangleminor from '../assets/images/rectangleminor.svg'
+
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
 import { Link } from "react-router-dom";
@@ -15,11 +14,6 @@ export default function Header({addhabit, setAddhabit}) {
         <Link to={'/'}><h1>TrackIt</h1></Link>
         <img src={profilePic} alt="" />
       </Navbar>
-      <SubTitle>
-        <h2>Meus hábitos</h2>
-        <img onClick={()=> setAddhabit(true)} src={rectangleminor} alt="r" />
-        <img onClick={()=> setAddhabit(true)} src={mais} alt="m" />
-      </SubTitle>
     </>
   );
 }
@@ -54,30 +48,4 @@ const Navbar = styled.div`
   
 `;
 
-const SubTitle = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  height: 50px;
-  
-  margin-top: 74px;
-  position: relative;
 
-  h2 {
-    font-size: 24px;
-    color: #126BA5;
-    padding-left: 20px;
-  }
-  img {
-    position: absolute;
-    top: 7px;
-    right: 17px;
-    cursor: pointer;
-  }
-  img:nth-child(3) {
-    position: absolute;
-    top: 17px;
-    right: 30px;
-  }
-`;

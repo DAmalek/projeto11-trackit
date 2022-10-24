@@ -8,24 +8,26 @@ import AddHabitPage from "./pages/habito/AddHabitpage";
 import { UserContext } from "./context/UserContext";
 import { useState } from "react";
 import React from "react";
+import { ProgressContextProvider } from "./context/ProgressContext";
 function App() {
   const [userdata, setUserdata] = useState(null);
-
+  
   return (
     <BrowserRouter>
       <GlobalStyle />
-      <UserContext.Provider value={{ userdata, setUserdata}}>
-        <Routes>
-          <Route path='/' element={<LogInPage />}  />
-          <Route path='cadastro' element={<SignInPage />}  />
-          <Route path='/habitos' element={<AddHabitPage />}  />
-          <Route path='/hoje' element={<TodayPage />}  />
-          <Route path='/historico' element={<HistoryPage />}  />
-          <Route path='login' element={<LogInPage />}  />
-          <Route path='login' element={<LogInPage />}  />
-        </Routes>
+      <UserContext.Provider value={{ userdata, setUserdata }}>
+        <ProgressContextProvider>
+          <Routes>
+            <Route path="/" element={<LogInPage />} />
+            <Route path="cadastro" element={<SignInPage />} />
+            <Route path="/habitos" element={<AddHabitPage />} />
+            <Route path="/hoje" element={<TodayPage />} />
+            <Route path="/historico" element={<HistoryPage />} />
+            <Route path="login" element={<LogInPage />} />
+            <Route path="login" element={<LogInPage />} />
+          </Routes>
+        </ProgressContextProvider>
       </UserContext.Provider>
-      
     </BrowserRouter>
   );
 }
