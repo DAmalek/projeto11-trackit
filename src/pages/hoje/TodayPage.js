@@ -3,21 +3,31 @@ import Header from "../../components/Header";
 import TodayHabit from "../../components/TodayHabit";
 import styled from "styled-components";
 import dayjs from "dayjs";
-import { weekdaysShort } from "dayjs/locale/pt-br";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ProgressContext } from "../../context/ProgressContext";
-
-
 
 export default function TodayPage() {
   var customParseFormat = require("dayjs/plugin/customParseFormat");
   dayjs.extend(customParseFormat);
-
+  
   require("dayjs/locale/pt-br");
   let today = dayjs().locale("pt-br").format("dddd, DD/MM");
 
-  const {todayList, setTodaylist} = useContext(ProgressContext);
-  console.log(today);
+  const {
+    todayList,
+     setTodaylist,
+     taskdonePercent,
+      setTaskdonePercent
+    } = useContext(ProgressContext);
+  
+  
+  
+  console.log('%% ', taskdonePercent);
+
+  useEffect(() => {
+    setTaskdonePercent(((todayList.filter(e => e.done === true).length)/todayList.length)*100)
+  },[todayList])
+  
 
   return (
     <>
@@ -25,7 +35,11 @@ export default function TodayPage() {
       <PageContainer>
         <TodayTitle>
           <h1>{today}</h1>
-          <h2>Nenhum hábito concluído ainda</h2>
+          {taskdonePercent > 0 ? (
+            <h3>{taskdonePercent}% dos habitos concluidos</h3>
+          ) : (
+            <h2>Nenhum hábito concluído ainda</h2>
+          )}
         </TodayTitle>
         <TodayHabit />
       </PageContainer>
@@ -51,6 +65,9 @@ const TodayTitle = styled.div`
     h2 {
         font-size: 18px;
         color: #bababa;
+    }
+    h3 {
+      color: green;
     }
 
 
