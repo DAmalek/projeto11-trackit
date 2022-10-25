@@ -26,10 +26,9 @@ export default function LogInForm() {
     const promise = axios.post(`${BASE_URL}auth/login`, body);
     
     promise.then((resp)=>{
-      console.log(resp.data)
-      alert('funfou');
-      navigate('/hoje')
+      console.log(resp.data);
       setUserdata(resp.data);
+      navigate('/hoje');
       
     })
     promise.catch((erro) => {
@@ -96,10 +95,19 @@ const Form = styled.form`
     justify-content: center;
     font-size: 21px;
   }
+  input {
+    background-color: #FFFFFF;
+    border: 1px solid #D5D5D5;
+    border-radius: 5px;
+  }
   input::placeholder {
     font-size: 21px;
+  }
+  input:disabled{
+    background-color: #F2F2F2;
+  }
+  input:-webkit-autofill {
     
   }
-
   
-`;
+`
