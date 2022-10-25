@@ -13,7 +13,8 @@ export default function AddHabitPage() {
   const [SelectedDays,setSelectedDays] = useState([])
   const [list, setList] = useState([]);
   const [refresh, setRefresh] = useState(false)
-  console.log()
+  const [name,setName] = useState('');
+  
   return (
     <>
       <Header />
@@ -25,6 +26,8 @@ export default function AddHabitPage() {
       <PageContainer>
         {addhabit ? (
           <AddHabit
+            name={name}
+            setName={setName}
             setAddhabit={setAddhabit}
             SelectedDays={SelectedDays}
             setSelectedDays={setSelectedDays}

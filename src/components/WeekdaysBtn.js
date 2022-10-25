@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { weekdays } from "../constants/data";
 
 
-export default function WeekdaysBtn({ SelectedDays, setSelectedDays}) {
+export default function WeekdaysBtn({ loading,SelectedDays, setSelectedDays}) {
     
     function selectDays(v){
         const isSelected = SelectedDays.some(d => v.days === d)
@@ -19,7 +19,7 @@ export default function WeekdaysBtn({ SelectedDays, setSelectedDays}) {
         <Weekdiv>
           {weekdays.map((v, i) => (
             <Weekbtn
-              onClick={() => selectDays(v)}
+              onClick={loading === false ? () => selectDays(v) : ""}  
               SelectedDays={SelectedDays}
               clickedbtn={v.days}
               key={i}

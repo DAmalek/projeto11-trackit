@@ -8,54 +8,77 @@ import { weekdays } from "../constants/data";
 import { BASE_URL } from "../constants/urls";
 import { UserContext } from "../context/UserContext";
 import WeekdaysBtn from "./WeekdaysBtn";
+import { ThreeDots } from  'react-loader-spinner'
 
-export default function AddHabit({setAddhabit,SelectedDays,setSelectedDays,list, setList,refresh, setRefresh}) {
+export default function AddHabit({name,setName,setAddhabit,SelectedDays,setSelectedDays,list, setList,refresh, setRefresh}) {
   
-  const [name,setName] = useState('')
+  const [loading, setLoading] = useState(false)
   const {userdata, setUserdata} = useContext(UserContext);
   console.log(SelectedDays);
   console.log(name);
-
+  
   function createHabit() {
+    setLoading(true);
     const body = {
       name,
-      days: SelectedDays
-    }
-    const token = userdata.token;
-    axios.post(
-      `${BASE_URL}habits`, 
-      body,
-      { headers: { Authorization: `Bearer ${token}` } }  
-    )
-    .then(
-      (resp) => {
-        //setList(...list,resp.data);
-        console.log(resp.data)
-        setRefresh(!refresh)
+      days: SelectedDays,
+    };
+    if (body.days.length === 0) {
+      alert("ta esquecendo do dia");
+      setLoading(false)
+    } else {
+      const token = userdata.token;
+      axios
+        .post(`${BASE_URL}habits`, body, {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        .then((resp) => {
+          //setList(...list,resp.data);
+          console.log(resp.data);
+          setRefresh(!refresh);
+          setLoading(false);
+        })
+        .catch((error) => {
+          alert(error.response.data.message);
+          setLoading(false);
+        });
       }
-    )
-    .catch(
-      (error => alert(error.response.data.message))
-    )
-  }
-  
+    }
   return (
     <>
       <HabitBox>
-        <input 
-          type='text'
+        <input
+          type="text"
           placeholder="  nome do habito"
           name="name"
           value={name}
-          onChange={e=>setName(e.target.value)}          
+          onChange={(e) => setName(e.target.value)}
           required
+          disabled={loading}
         />
-        <WeekdaysBtn 
+        <WeekdaysBtn
           SelectedDays={SelectedDays}
           setSelectedDays={setSelectedDays}
-         />
-        <h1 onClick={()=> setAddhabit(false)}>Cancelar</h1>
-        <button onClick={createHabit} >Salvar</button>
+          loading={loading}
+          
+        />
+        <h1 onClick={() => setAddhabit(false)}>Cancelar</h1>
+        <button onClick={createHabit}>
+          {loading === false ? (
+            'Salvar'
+          ) : (
+            <ThreeDots
+              height="70"
+              width="70"
+              radius="9"
+              color="#ffffff"
+              ariaLabel="three-dots-loading"
+              wrapperStyle={{}}
+              wrapperClassName=""
+              visible={true}
+            />
+          )}
+        </button>
       </HabitBox>
     </>
   );
@@ -99,6 +122,9 @@ const HabitBox = styled.div`
     font-size: 20px;
     bottom: 15px;
     right: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
   }
 `;

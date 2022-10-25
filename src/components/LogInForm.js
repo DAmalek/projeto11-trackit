@@ -4,6 +4,8 @@ import axios from "axios";
 import { BASE_URL } from "../constants/urls";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/UserContext";
+import { ThreeDots } from  'react-loader-spinner'
+
 
 
 export default function LogInForm() {
@@ -11,11 +13,12 @@ export default function LogInForm() {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const {userdata, setUserdata} = useContext(UserContext);
-
+  const [loading, setLoading] = useState(false)
   
 
   function logInRequest(event) {
     event.preventDefault()
+    setLoading(true)
     const body = {
       email ,
       password
@@ -29,9 +32,10 @@ export default function LogInForm() {
       setUserdata(resp.data);
       
     })
-    promise.catch((erro)=>
-      alert(erro.response.data.message)
-    )
+    promise.catch((erro) => {
+      alert(erro.response.data.message);
+      setLoading(false);
+    });
   }
 
 
@@ -39,20 +43,39 @@ export default function LogInForm() {
     <>
       <Form onSubmit={logInRequest}>
         <input
-          name="email" 
+          name="email"
           value={email}
-          onChange={e=>setEmail(e.target.value)}
-          placeholder="  email" 
-          type="text" />
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="  email"
+          type="text"
+          disabled={loading}
+        />
 
-        <input 
-          name="password" 
+        <input
+          name="password"
           alue={password}
-          onChange={e=>setPassword(e.target.value)}
-          placeholder="  senha" 
-          type="password" />
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="  senha"
+          type="password"
+          disabled={loading}
+        />
 
-        <button type="submit">Entrar</button>
+        <button disabled={loading} type="submit">
+          {loading === false ? (
+            'Entrar'
+          ) : (
+            <ThreeDots
+              height="80"
+              width="80"
+              radius="9"
+              color="#ffffff"
+              ariaLabel="three-dots-loading"
+              wrapperStyle={{}}
+              wrapperClassName=""
+              visible={true}
+            />
+          )}
+        </button>
       </Form>
     </>
   );
@@ -68,7 +91,9 @@ const Form = styled.form`
   button {
     width: 300px;
     height: 50px;
-    align-self: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: 21px;
   }
   input::placeholder {

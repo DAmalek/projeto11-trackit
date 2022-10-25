@@ -45,7 +45,7 @@ export default function HabitList({list, setList,refresh, setRefresh}) {
         <Container key={value.id}>
           <p>{value.name}</p>
             
-          <Weekbtn 
+          <Weekbtn3 
             habitDays={value.days} 
           >
           {weekdays.map((v, i) => (
@@ -54,7 +54,7 @@ export default function HabitList({list, setList,refresh, setRefresh}) {
                 click={value.days.includes(v.days)}
               >{v.letter}</Weekbtn2>
               ))}
-          </Weekbtn>
+          </Weekbtn3>
           <img onClick={()=>deleteHabit(value.id)} color="#666666" src={trash} alt="aaa" />
         </Container>
       ))}
@@ -70,11 +70,13 @@ const Container = styled.div`
     position: relative;
     margin: 10px 0;
     p {
+        width: 300px;
         padding: 10px 3px;
         margin-left: 18px;
         color: ${textColor};
         font-size: 22px;
         font-weight: 400;
+        
     }
     img {
         position: absolute;
@@ -82,7 +84,7 @@ const Container = styled.div`
         right: 13px;
     }
 `
-const Weekbtn = styled.div`
+const Weekbtn3 = styled.div`
     display: flex;
     width: 300px;
     margin-bottom: 10px;
