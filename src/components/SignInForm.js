@@ -71,7 +71,7 @@ export default function SignInForm() {
           name="image"
           value={image}
           onChange={e=>setImage(e.target.value)} 
-          placeholder="  foto" 
+          placeholder="  foto (URL)" 
           type="text"          
           required 
         />

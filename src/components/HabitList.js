@@ -45,13 +45,11 @@ export default function HabitList({list, setList,refresh, setRefresh}) {
       {list.map((value) => (
         <Container key={value.id}>
           <p>{value.name}</p>
-          {wannaD === true ? (
+          {wannaD === value.id ? (
             <span>Quer excluir o habito, mermo?</span>
-          ) : ( <></>
-            
-          )}
+          ) : ( <></> )}
 
-          {wannaD === true ? (
+          {wannaD === value.id ? (
             <Confirm>
               {" "}
               <h1 onClick={() => setWannaD(false)}>Cancelar</h1>
@@ -70,7 +68,7 @@ export default function HabitList({list, setList,refresh, setRefresh}) {
           )}
 
           <img
-            onClick={() => setWannaD(true)}
+            onClick={() => setWannaD(value.id)}
             color="#666666"
             src={trash}
             alt="aaa"
@@ -95,6 +93,7 @@ const Container = styled.div`
         color: ${textColor};
         font-size: 22px;
         font-weight: 400;
+        background-color: white;
         
     }
     img {
